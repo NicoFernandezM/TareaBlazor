@@ -1,0 +1,41 @@
+﻿@page "/register"
+
+<h3>Registro</h3>
+
+@if (!IsRegistered)
+{
+    <form @onsubmit="HandleSubmit">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" @bind="Username" />
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" @bind="Password" />
+
+        <label for="confirmPassword">Confirmar contraseña:</label>
+        <input type="password" id="confirmPassword" @bind="ConfirmPassword" />
+
+        <button type="submit">Registrarse</button>
+    </form>
+}
+else
+{
+    <p>¡Te has registrado con éxito como @Username!</p>
+}
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+    private string ConfirmPassword { get; set; }
+    private bool IsRegistered { get; set; }
+
+    private async Task HandleSubmit()
+    {
+        // Aquí deberías implementar la lógica de registro, por ejemplo, llamar a un servicio de registro de usuarios.
+
+        // En este ejemplo, simplemente comprobaremos si el usuario ingresó un nombre de usuario y una contraseña válidos.
+        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && Password == ConfirmPassword)
+        {
+            IsRegistered = true;
+        }
+    }
+}
